@@ -33,6 +33,7 @@ static async Task Practical()
         // Iterate through the sections within each date
         foreach (var section in date.Sections)
         {
+            if (!section.DisplayName.ToLower().Equals("horses")) break;
             // Iterate through the meetings within each section
             foreach (var meeting in section.Meetings)
             {
