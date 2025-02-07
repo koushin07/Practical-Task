@@ -9,11 +9,11 @@ await Practical();
 
 static async Task Practical()
 {
-   // Create an instance of HttpClient for making HTTP requests
+    // Create an instance of HttpClient for making HTTP requests
     using var http = new HttpClient();
 
     // Define the URL of the API endpoint to fetch racing data
-    var url = "https://www.sportsbet.com.au/apigw/sportsbook-racing/Sportsbook/Racing/AllRacing/2025-02-09";
+    var url = $"https://www.sportsbet.com.au/apigw/sportsbook-racing/Sportsbook/Racing/AllRacing/{DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")}";
 
     // Make an asynchronous GET request to the API endpoint
     var response = await http.GetAsync(url);
@@ -41,15 +41,14 @@ static async Task Practical()
                 {
                     // Convert Unix timestamps to DateTime objects and format them
                     DateTime dateTime = DateTimeOffset.FromUnixTimeSeconds(date.MeetingDate).DateTime;
-                    DateTime dateRacing = DateTimeOffset.FromUnixTimeSeconds(evnt.startTime).DateTime;
 
-                    // Add the race data to the list
+                    DateTime dateRacing = DateTimeOffset.FromUnixTimeSeconds(evnt.startTime).DateTime; // Add the race data to the list
                     raceDataList.Add(new RaceData
                     {
                         MeetingDate = dateTime.ToString("yyyy-MM-dd"), // Format the date
                         RacingName = evnt.name,
                         RacingNumber = $"Race {evnt.raceNumber}", // Get the race number
-                        RacingTime = dateRacing.ToString("yyyy-MM-dd"), // Format the racing time
+                        RacingTime = dateRacing.ToString("hh:mm tt"), // Format the racing time
                     });
                 }
             }

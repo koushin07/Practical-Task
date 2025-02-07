@@ -5,7 +5,7 @@ public class Event
 {
     public int id { get; set; }
     public int raceNumber { get; set; }
-    public int startTime { get; set; }
+    public long startTime { get; set; }
     public string name { get; set; }
     public bool hasBIR { get; set; }
     public bool hasBIRStarted { get; set; }
